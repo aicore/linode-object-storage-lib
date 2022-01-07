@@ -1,0 +1,19 @@
+{
+  "name": "linode-object-storage-lib",
+  "version": "1.0.0",
+  "description": "Javascript adapter package for linode object storage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.820.0",
+    "node-fetch": "^3.0.0",
+    "path": "^0.12.7",
+    "url-join": "^4.0.1",
+    "winston": "^3.3.3"
+  },
+  "author": "ushmajit",
+  "type": "module",
+  "license": "ISC"
+}

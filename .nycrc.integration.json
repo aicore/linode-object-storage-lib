@@ -1,0 +1,22 @@
+{
+  "all": true,
+  "check-coverage": true,
+  "reporter": [
+    "html",
+    "json",
+    "lcov",
+    "text",
+    "text-summary"
+  ],
+  "reports-dir": "coverage-unit",
+  "include": [
+    "src/**/*.js"
+  ],
+  "exclude": [
+    "**/*.spec.js"
+  ],
+  "branches": 0,
+  "lines": 0,
+  "functions": 0,
+  "statements": 0
+}

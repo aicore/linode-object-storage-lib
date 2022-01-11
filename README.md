@@ -1,7 +1,7 @@
 # Linode Object Storage JS Module
 A javascript based module to access and perform operations on Linode object storage via code.
 
-##Installing
+## Installing
 * > npm i linode-object-storage-lib
 
 ## Usage

@@ -1,0 +1,17 @@
+test
+.github
+.husky
+.idea
+coverage-integration
+coverage-unit
+node_modules
+.commitlintrc.json
+.eslintignore
+.eslintrc.json
+.gitignore
+.npmignore
+.npmrc
+.nycrc.integration.json
+.nycrc.unit.json
+.sonarcloud.properties
+CODE_OF_CONDUCT.md

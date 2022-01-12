@@ -19,7 +19,7 @@
     "build": "npm run cover"
   },
   "dependencies": {
-    "aws-sdk": "2.820.0",
+    "aws-sdk": "2.1055.0",
     "node-fetch": "3.0.0",
     "path": "0.12.7",
     "url-join": "4.0.1"

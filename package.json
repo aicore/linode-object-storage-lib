@@ -1,6 +1,6 @@
 {
   "name": "@aicore/linode-object-storage-lib",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Javascript adapter package for linode object storage",
   "main": "index.js",
   "scripts": {

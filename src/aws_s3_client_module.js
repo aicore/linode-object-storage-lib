@@ -27,14 +27,15 @@ async function uploadFileToBucket (accessKeyId, secretAccessKey, region, file, b
         accessKeyId: accessKeyId,
         secretAccessKey: secretAccessKey,
         endpoint: new Endpoint(
-            joinURL('https://', region + url),
-        ),
+            joinURL('https://', region + url)
+        )
     });
 
     // Read the file contents and upload it to object storage
     readFile(path.resolve(file), {}, async (error, data) => {
-        if (error)
+        if (error) {
             return console.log('There was a error reading your file\n' + JSON.stringify(error));
+        }
 
         console.log('Uploading...');
 
@@ -43,7 +44,7 @@ async function uploadFileToBucket (accessKeyId, secretAccessKey, region, file, b
                 .putObject({
                     Bucket: bucket,
                     Key: fileName,
-                    Body: data,
+                    Body: data
                 })
                 .promise();
 

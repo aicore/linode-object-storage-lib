@@ -1,6 +1,21 @@
 # Linode Object Storage JS Module
 A javascript based module to access and perform operations on Linode object storage via code.
 
+## Code Guardian
+[![<app> build verification](https://github.com/aicore/linode-object-storage-lib/actions/workflows/build_verify.yml/badge.svg)](https://github.com/aicore/linode-object-storage-lib/actions/workflows/build_verify.yml)
+
+<a href="https://sonarcloud.io/summary/new_code?id=aicore_linode-object-storage-lib">
+  <img src="https://sonarcloud.io/api/project_badges/measure?project=aicore_linode-object-storage-lib&metric=alert_status" alt="Sonar code quality check" />
+  <img src="https://sonarcloud.io/api/project_badges/measure?project=aicore_linode-object-storage-lib&metric=security_rating" alt="Security rating" />
+  <img src="https://sonarcloud.io/api/project_badges/measure?project=aicore_linode-object-storage-lib&metric=vulnerabilities" alt="vulnerabilities" />
+  <img src="https://sonarcloud.io/api/project_badges/measure?project=aicore_linode-object-storage-lib&metric=coverage" alt="Code Coverage" />
+  <img src="https://sonarcloud.io/api/project_badges/measure?project=aicore_linode-object-storage-lib&metric=bugs" alt="Code Bugs" />
+  <img src="https://sonarcloud.io/api/project_badges/measure?project=aicore_linode-object-storage-lib&metric=reliability_rating" alt="Reliability Rating" />
+  <img src="https://sonarcloud.io/api/project_badges/measure?project=aicore_linode-object-storage-lib&metric=sqale_rating" alt="Maintainability Rating" />
+  <img src="https://sonarcloud.io/api/project_badges/measure?project=aicore_linode-object-storage-lib&metric=ncloc" alt="Lines of Code" />
+  <img src="https://sonarcloud.io/api/project_badges/measure?project=aicore_linode-object-storage-lib&metric=sqale_index" alt="Technical debt" />
+</a>
+
 ## Installing
 * > npm i linode-object-storage-lib
 
@@ -29,21 +44,6 @@ await linodeModule.uploadFileToLinodeBucket(accessKeyId,
 const fileURL = await linodeModule.fetchObjectUrl(accessToken, 
     clusterId, bucketName, objectName);
 ```
-
-## Code Guardian
-[![<app> build verification](https://github.com/aicore/linode-object-storage-lib/actions/workflows/build_verify.yml/badge.svg)](https://github.com/aicore/linode-object-storage-lib/actions/workflows/build_verify.yml)
-
-<a href="https://sonarcloud.io/summary/new_code?id=aicore_template-nodejs-ts">
-  <img src="https://sonarcloud.io/api/project_badges/measure?project=aicore_linode-object-storage-lib&metric=alert_status" alt="Sonar code quality check" />
-  <img src="https://sonarcloud.io/api/project_badges/measure?project=aicore_linode-object-storage-lib&metric=security_rating" alt="Security rating" />
-  <img src="https://sonarcloud.io/api/project_badges/measure?project=aicore_linode-object-storage-lib&metric=vulnerabilities" alt="vulnerabilities" />
-  <img src="https://sonarcloud.io/api/project_badges/measure?project=aicore_linode-object-storage-lib&metric=coverage" alt="Code Coverage" />
-  <img src="https://sonarcloud.io/api/project_badges/measure?project=aicore_linode-object-storage-lib&metric=bugs" alt="Code Bugs" />
-  <img src="https://sonarcloud.io/api/project_badges/measure?project=aicore_linode-object-storage-lib&metric=reliability_rating" alt="Reliability Rating" />
-  <img src="https://sonarcloud.io/api/project_badges/measure?project=aicore_linode-object-storage-lib&metric=sqale_rating" alt="Maintainability Rating" />
-  <img src="https://sonarcloud.io/api/project_badges/measure?project=aicore_linode-object-storage-lib&metric=ncloc" alt="Lines of Code" />
-  <img src="https://sonarcloud.io/api/project_badges/measure?project=aicore_linode-object-storage-lib&metric=sqale_index" alt="Technical debt" />
-</a>
 
 # Commands available
 ## Building

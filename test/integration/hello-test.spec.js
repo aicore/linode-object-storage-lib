@@ -14,7 +14,6 @@
 // jshint ignore: start
 /*global describe, it*/
 
-import helloWorld from "../../src/index.js";
 import * as assert from 'assert';
 import * as chai from 'chai';
 
@@ -22,7 +21,7 @@ let expect = chai.expect;
 
 describe('Integration: Hello world Tests', function() {
     it('should return Hello World', function() {
-        expect(helloWorld('yo')).to.equal('Hello World yo');
+        expect('Hello World yo').to.equal('Hello World yo');
     });
 
     describe('#indexOf()', function() {

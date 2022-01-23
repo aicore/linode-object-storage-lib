@@ -17,7 +17,7 @@ A javascript based module to access and perform operations on Linode object stor
 </a>
 
 ## Installing
-* > npm i linode-object-storage-lib
+* > npm i @aicore/linode-object-storage-lib
 
 ## Usage
 ### Prerequisite

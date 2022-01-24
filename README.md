@@ -31,7 +31,20 @@ A javascript based module to access and perform operations on Linode object stor
     
     API Key Generation Guide: https://www.linode.com/docs/guides/getting-started-with-the-linode-api/
 
-### Code usage
+## Code usage
+
+### Uploading File to Linode Bucket
+
+Request Parameters :
+
+* **accessKeyId (type: String):** bucket specific unique identifier required for authentication
+* **secretAccessKey (type: String):** user specific unique identifier required for authentication
+* **region (type: String):** indicates the geographical server location (e.g us-east-1, eu-west-1a)
+* **file (type: String):** complete path of the file to be uploaded is passed on as a parameter
+* **bucket (type: String):** uniquely identifies the bucket where the file should be uploaded
+
+Please refer to https://docs.aws.amazon.com/sdk-for-javascript/index.html for more details.
+
 ```js
 // import the module directly to your file
 import linodeModule from 'linode_object_storage_module';
@@ -39,10 +52,42 @@ import linodeModule from 'linode_object_storage_module';
 //Example for uploading file to linode object storage
 await linodeModule.uploadFileToLinodeBucket(accessKeyId, 
     secretAccessKey, region, file, bucket);
+```
 
+### Fetching Object URL
+
+Request Parameters :
+
+* **accessToken (type: String):** Linode API Key.
+* **clusterId (type: String):**  indicates the geographical server location (e.g 'us-east-1', 'eu-west-1a')
+* **bucketName (type: String):** Exact Name of the bucket the file resides in
+* **objectName (type: String):** Exact Name(not the path) of the the file in String
+
+Please refer to the API Documentation for the complete list of path and request body parameters:
+https://www.linode.com/docs/api/object-storage/#object-storage-object-url-create
+
+```js
 //Example for retrieving the File object URL
 const fileURL = await linodeModule.fetchObjectUrl(accessToken, 
     clusterId, bucketName, objectName);
+```
+
+```
+Request Body:
+
+curl -H "Content-Type: application/json" \ -H "Authorization: Bearer $TOKEN" \
+  -X POST -d '{
+      "method": "GET",
+      "name": "example"
+    }' \
+  https://api.linode.com/v4/object-storage/buckets/us-east-1/example-bucket/object-url
+
+Response Body:
+
+{
+  "url": "https://us-east-1.linodeobjects.com/example-bucket/example?Signature=qr98TEucCntPgEG%2BsZQGDsJg93c%3D\u0026Expires=1567609905\u0026AWSAccessKeyId=G4YAF81XWY61DQM94SE0"
+}
+
 ```
 
 # Commands available

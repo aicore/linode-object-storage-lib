@@ -8,7 +8,7 @@
     "text",
     "text-summary"
   ],
-  "reports-dir": "coverage-unit",
+  "reports-dir": "coverage-integration",
   "include": [
     "src/**/*.js"
   ],

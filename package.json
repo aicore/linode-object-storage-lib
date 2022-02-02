@@ -1,8 +1,8 @@
 {
   "name": "@aicore/linode-object-storage-lib",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Javascript adapter package for linode object storage",
-  "main": "index.js",
+  "main": "src/linode_object_storage_module.js",
   "scripts": {
     "eslint": "npm run lint",
     "eslint:fix": "npm run lint:fix",

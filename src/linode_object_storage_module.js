@@ -17,8 +17,8 @@ const BASE_LINODE_OBJECT_URL = 'https://api.linode.com/v4/object-storage/buckets
  */
 async function uploadFileToLinodeBucket (accessKeyId, secretAccessKey, region, file, bucket) {
     if (!accessKeyId || !secretAccessKey || !region || !file || !bucket) {
-        throw "Invalid parameter value: accessKeyId, secretAccessKey, region, filePath " +
-        "and bucketName are required parameters";
+        throw new Error("Invalid parameter value: accessKeyId, secretAccessKey, region, filePath " +
+        "and bucketName are required parameters");
     }
 
     const response = await uploadFileToBucket(accessKeyId,
@@ -47,8 +47,8 @@ async function uploadFileToLinodeBucket (accessKeyId, secretAccessKey, region, f
  */
 async function fetchObjectUrl (accessToken, region, bucketName, objectName) {
     if (!accessToken || !region || !bucketName || !objectName) {
-        throw "Invalid parameter value: accessToken, region, fileName " +
-        "and bucketName are required parameters";
+        throw new Error("Invalid parameter value: accessToken, region, fileName " +
+        "and bucketName are required parameters");
     }
 
     const body = {
@@ -63,10 +63,10 @@ async function fetchObjectUrl (accessToken, region, bucketName, objectName) {
     );
 
     if (response && response.exists === false) {
-        throw "[Error] Object: " + objectName + " does not exist in the bucket: " + bucketName;
+        throw new Error("Object: " + objectName + " does not exist in the bucket: " + bucketName);
     }
     if (response && response.errors) {
-        throw "[Error] FecthObjectUrl failed with the following error:" + JSON.stringify(response.errors);
+        throw new Error("FecthObjectUrl failed with the following error:" + JSON.stringify(response.errors));
     }
     console.log("Object Url received : " + JSON.stringify(response));
     return response;

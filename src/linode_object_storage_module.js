@@ -16,10 +16,19 @@ const BASE_LINODE_OBJECT_URL = 'https://api.linode.com/v4/object-storage/buckets
  * @returns {Promise<void>}
  */
 async function uploadFileToLinodeBucket (accessKeyId, secretAccessKey, region, file, bucket) {
+    if (!accessKeyId || !secretAccessKey || !region || !file || !bucket) {
+        throw "Invalid parameter value: accessKeyId, secretAccessKey, region, filePath " +
+        "and bucketName are required parameters";
+    }
 
-    await uploadFileToBucket(accessKeyId,
+    const response = await uploadFileToBucket(accessKeyId,
         secretAccessKey, region, file, bucket, BASE_LINODE_URL_SUFFIX);
-
+    if (response.status === true) {
+        console.log("File: " + file + " uploaded successfully to Bucket: " + bucket);
+    } else {
+        console.log("Error uploading the file: " + file + " Message: " + response.errorMessage);
+    }
+    return response;
 }
 
 /**
@@ -31,27 +40,39 @@ async function uploadFileToLinodeBucket (accessKeyId, secretAccessKey, region, f
  * Please refer to https://www.linode.com/docs/api/object-storage/#object-storage-object-url-create for more details.
  *
  * @param accessToken Linode API Key.
- * @param clusterId indicates the geographical server location (e.g us-east-1, eu-west-1a)
+ * @param region indicates the geographical server location (e.g us-east-1, eu-west-1a)
  * @param bucketName Exact Name of the bucket the file resides in
  * @param objectName Exact Name of the the file
  * @returns {Promise<*>} File URL using which the file can be downloaded.
  */
-async function fetchObjectUrl (accessToken, clusterId, bucketName, objectName) {
+async function fetchObjectUrl (accessToken, region, bucketName, objectName) {
+    if (!accessToken || !region || !bucketName || !objectName) {
+        throw "Invalid parameter value: accessToken, region, fileName " +
+        "and bucketName are required parameters";
+    }
+
     const body = {
-      'method': 'GET',
-      'name': objectName
+        'method': 'GET',
+        'name': objectName
     };
     const response = await makeRequest(
         accessToken,
         'POST',
-        `${BASE_LINODE_OBJECT_URL}/${clusterId}/${bucketName}/object-url`,
+        `${BASE_LINODE_OBJECT_URL}/${region}/${bucketName}/object-url`,
         body
     );
+
+    if (response && response.exists === false) {
+        throw "[Error] Object: " + objectName + " does not exist in the bucket: " + bucketName;
+    }
+    if (response && response.errors) {
+        throw "[Error] FecthObjectUrl failed with the following error:" + JSON.stringify(response.errors);
+    }
     console.log("Object Url received : " + JSON.stringify(response));
     return response;
 }
 
 export default {
-  uploadFileToLinodeBucket,
-  fetchObjectUrl
+    uploadFileToLinodeBucket,
+    fetchObjectUrl
 };

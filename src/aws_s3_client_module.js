@@ -1,7 +1,8 @@
 import pkg from 'aws-sdk';
 import joinURL from 'url-join';
 import path from 'path';
-import {readFile} from 'fs';
+import fsExtra from "fs-extra";
+import stream from "stream";
 
 const {S3, Endpoint} = pkg;
 
@@ -19,10 +20,7 @@ const {S3, Endpoint} = pkg;
  */
 
 async function uploadFileToBucket (accessKeyId, secretAccessKey, region, file, bucket, url) {
-    return new Promise((resolve, reject)=>{
-        const fileName = path.basename(file);
-
-        // Initialized the AWS S3 Client
+    const uploadStream = ({ Bucket, Key }) => {
         const s3Client = new S3({
             accessKeyId: accessKeyId,
             secretAccessKey: secretAccessKey,
@@ -30,35 +28,21 @@ async function uploadFileToBucket (accessKeyId, secretAccessKey, region, file, b
                 joinURL('https://', region + url)
             )
         });
-
-        // Read the file contents and upload it to object storage
-        readFile(path.resolve(file), {}, async (error, data) => {
-            if (error) {
-                console.error('There was a error reading your file\n' + JSON.stringify(error));
-                reject(error);
-                return;
-            }
-
-            console.log('Uploading...');
-
-            try {
-                await s3Client
-                    .putObject({
-                        Bucket: bucket,
-                        Key: fileName,
-                        Body: data
-                    })
-                    .promise();
-
-                console.log(`Uploaded ${file}`);
-                resolve(file);
-            } catch (e) {
-                const errorMsg = 'Error in uploading\n' + JSON.stringify(e);
-                console.error(errorMsg);
-                reject(e);
-            }
-        });
-    });
+        const pass = new stream.PassThrough();
+        return {
+            writeStream: pass,
+            promise: s3Client.upload({ Bucket, Key, Body: pass }).promise()
+        };
+    };
+    const filePath = path.basename(file);
+    const { writeStream, promise } = uploadStream({Bucket: bucket, Key: filePath});
+    fsExtra.createReadStream(filePath).pipe(writeStream);
+    let response = {
+        status: true,
+        errorMessage: ''
+    };
+    await promise.catch((reason)=> { response.status = false; response.errorMessage(reason.toString()); });
+    return response;
 }
 
 export default uploadFileToBucket;

@@ -19,41 +19,45 @@ const {S3, Endpoint} = pkg;
  */
 
 async function uploadFileToBucket (accessKeyId, secretAccessKey, region, file, bucket, url) {
+    return new Promise((resolve, reject)=>{
+        const fileName = path.basename(file);
 
-    const fileName = path.basename(file);
+        // Initialized the AWS S3 Client
+        const s3Client = new S3({
+            accessKeyId: accessKeyId,
+            secretAccessKey: secretAccessKey,
+            endpoint: new Endpoint(
+                joinURL('https://', region + url)
+            )
+        });
 
-    // Initialized the AWS S3 Client
-    const s3Client = new S3({
-        accessKeyId: accessKeyId,
-        secretAccessKey: secretAccessKey,
-        endpoint: new Endpoint(
-            joinURL('https://', region + url)
-        )
-    });
+        // Read the file contents and upload it to object storage
+        readFile(path.resolve(file), {}, async (error, data) => {
+            if (error) {
+                console.error('There was a error reading your file\n' + JSON.stringify(error));
+                reject(error);
+                return;
+            }
 
-    // Read the file contents and upload it to object storage
-    readFile(path.resolve(file), {}, async (error, data) => {
-        if (error) {
-            return console.log('There was a error reading your file\n' + JSON.stringify(error));
-        }
+            console.log('Uploading...');
 
-        console.log('Uploading...');
+            try {
+                await s3Client
+                    .putObject({
+                        Bucket: bucket,
+                        Key: fileName,
+                        Body: data
+                    })
+                    .promise();
 
-        try {
-            await s3Client
-                .putObject({
-                    Bucket: bucket,
-                    Key: fileName,
-                    Body: data
-                })
-                .promise();
-
-            console.log(`Uploaded ${file}`);
-        } catch (e) {
-            const errorMsg = 'Error in uploading\n' + JSON.stringify(e);
-            console.error(errorMsg);
-            throw errorMsg;
-        }
+                console.log(`Uploaded ${file}`);
+                resolve(file);
+            } catch (e) {
+                const errorMsg = 'Error in uploading\n' + JSON.stringify(e);
+                console.error(errorMsg);
+                reject(e);
+            }
+        });
     });
 }
 

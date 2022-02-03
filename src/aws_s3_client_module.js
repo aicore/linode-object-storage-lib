@@ -37,11 +37,14 @@ async function uploadFileToBucket (accessKeyId, secretAccessKey, region, file, b
     const filePath = path.basename(file);
     const { writeStream, promise } = uploadStream({Bucket: bucket, Key: filePath});
     fsExtra.createReadStream(filePath).pipe(writeStream);
-    let response = {
+    const response = {
         status: true,
         errorMessage: ''
     };
-    await promise.catch((reason)=> { response.status = false; response.errorMessage(reason.toString()); });
+    await promise.catch((reason)=> {
+        response.status = false;
+        response.errorMessage = reason.toString();
+    });
     return response;
 }
 

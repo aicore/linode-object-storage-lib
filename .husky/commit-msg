@@ -1,5 +1,35 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
+EXIT_CODE=0
+npx --no-install commitlint --edit || EXIT_CODE=$?
 
-npx --no-install commitlint --edit 
+if [ $EXIT_CODE -eq 1 ]; then
+    echo   "Git commit message you entered is improper!!!!!!
+    We follow a specific commit message format as described below. Please modify
+    your commit message based on the errors above and try again:
+    This will benefit to quickly scan through commit history to debug issues.
+           Format: <type>(<scope>): <subject>
+           <scope> is optional
+
+           Example
+            1. feat: add login infrastructure
+               ^--^  ^------------^
+               |     |
+               |     +-> Summary in present tense. Should not end with a `.` and must start with lower case.
+               |
+               +-------> Type: chore, docs, feat, fix, refactor, style, or test.
+
+            2. style: refactoring type module to typeless module class
+
+           Available Types:
+           feat: (new feature for the user, not a new feature for build script)
+           fix: (bug fix for the user, not a fix to a build script)
+           ci: (ci or build script related changes)
+           docs: (changes to the documentation)
+           style: (formatting, missing semi colons, etc; no production code change)
+           refactor: (refactoring production code, eg. renaming a variable)
+           test: (adding missing tests, refactoring tests; no production code change)
+           chore: (updating grunt tasks etc; no production code change)"
+    exit 1
+fi

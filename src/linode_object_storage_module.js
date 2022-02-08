@@ -21,14 +21,9 @@ async function uploadFileToLinodeBucket (accessKeyId, secretAccessKey, region, f
         "and bucketName are required parameters");
     }
 
-    const response = await uploadFileToBucket(accessKeyId,
+    await uploadFileToBucket(accessKeyId,
         secretAccessKey, region, file, bucket, BASE_LINODE_URL_SUFFIX);
-    if (response.status === true) {
-        console.log("File: " + file + " uploaded successfully to Bucket: " + bucket);
-    } else {
-        console.log("Error uploading the file: " + file + " Message: " + response.errorMessage);
-    }
-    return response;
+    console.log("File: " + file + " uploaded successfully to Bucket: " + bucket);
 }
 
 /**

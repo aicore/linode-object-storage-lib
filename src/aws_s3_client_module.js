@@ -16,7 +16,7 @@ const {S3, Endpoint} = pkg;
  * @param filePath complete path of the filePath to be uploaded is passed on as a parameter
  * @param bucket uniquely identifies the bucket where the filePath should be uploaded
  * @param url suffix url to decide whether to upload the filePath to AWS S3 or LiNode Object Storage
- * @returns {Promise<void>} void
+ * @returns {Promise<{errorMessage: string, status: boolean}>} void
  */
 
 async function uploadFileToBucket (accessKeyId, secretAccessKey, region, filePath, bucket, url) {
@@ -41,11 +41,13 @@ async function uploadFileToBucket (accessKeyId, secretAccessKey, region, filePat
         status: true,
         errorMessage: ''
     };
-    await promise.catch((reason)=> {
+    try{
+        await promise;
+    }catch (exception) {
         response.status = false;
-        response.errorMessage = reason.toString();
-    });
-    return response;
+        response.errorMessage = exception.toString();
+    }
+    return Promise.resolve(response);
 }
 
 export default uploadFileToBucket;

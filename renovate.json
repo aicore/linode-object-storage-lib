@@ -4,7 +4,7 @@
     "config:base"
   ],
   "timezone": "Asia/Calcutta",
-  "schedule": ["after 9pm on sunday"],
+  "schedule": ["before 3am on the first day of the month"],
   "packageRules": [
     {
       "matchDepTypes": ["devDependencies", "dependencies"],

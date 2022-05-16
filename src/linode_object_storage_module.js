@@ -13,16 +13,18 @@ const BASE_LINODE_OBJECT_URL = 'https://api.linode.com/v4/object-storage/buckets
  * @param region indicates the geographical server location (e.g us-east-1, eu-west-1a)
  * @param file complete path of the file to be uploaded is passed on as a parameter
  * @param bucket uniquely identifies the bucket where the file should be uploaded
+ * @param objectNameOverride If provided, the file will be uploaded with the given object name. Use this to provide
+ * custom file names and paths in linode.
  * @returns {Promise<void>}
  */
-async function uploadFileToLinodeBucket (accessKeyId, secretAccessKey, region, file, bucket) {
+async function uploadFileToLinodeBucket (accessKeyId, secretAccessKey, region, file, bucket, objectNameOverride) {
     if (!accessKeyId || !secretAccessKey || !region || !file || !bucket) {
         throw new Error("Invalid parameter value: accessKeyId, secretAccessKey, region, filePath " +
         "and bucketName are required parameters");
     }
 
     await uploadFileToBucket(accessKeyId,
-        secretAccessKey, region, file, bucket, BASE_LINODE_URL_SUFFIX);
+        secretAccessKey, region, file, bucket, BASE_LINODE_URL_SUFFIX, objectNameOverride);
     console.log("File: " + file + " uploaded successfully to Bucket: " + bucket);
 }
 
@@ -37,7 +39,7 @@ async function uploadFileToLinodeBucket (accessKeyId, secretAccessKey, region, f
  * @param accessToken Linode API Key.
  * @param region indicates the geographical server location (e.g us-east-1, eu-west-1a)
  * @param bucketName Exact Name of the bucket the file resides in
- * @param objectName Exact Name of the the file
+ * @param objectName Exact Name of the file
  * @returns {Promise<*>} File URL using which the file can be downloaded.
  */
 async function fetchObjectUrl (accessToken, region, bucketName, objectName) {

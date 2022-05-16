@@ -42,7 +42,7 @@ Request Parameters :
 * **region (type: String):** indicates the geographical server location (e.g us-east-1, eu-west-1a)
 * **file (type: String):** complete path of the file to be uploaded is passed on as a parameter
 * **bucket (type: String):** uniquely identifies the bucket where the file should be uploaded
-* **objectNameOverride (type: String):** Optional parameter, if given, the file name in wasabi will be overridden.
+* **objectNameOverride (type: String):** Optional parameter, if given, the file name in linode will be overridden.
 
 Please refer to https://docs.aws.amazon.com/sdk-for-javascript/index.html for more details.
 
@@ -55,7 +55,7 @@ const response = await linodeModule.uploadFileToLinodeBucket(accessKeyId,
     secretAccessKey, region, file, bucket);
 
 //Example if you want to change the file name in linode/ provide suctom upload location
-const response = await linodeModule.uploadFileToBucket(accessKey, secretKey, region, fileName, bucketName, customPathInWasabi);
+const response = await linodeModule.uploadFileToBucket(accessKey, secretKey, region, fileName, bucketName, customPathInLinode);
 ```
 
 ### Fetching Object URL

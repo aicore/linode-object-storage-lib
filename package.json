@@ -22,7 +22,7 @@
     "release": "npm run bumpPatchVersionWithGitTag"
   },
   "dependencies": {
-    "aws-sdk": "2.1202.0",
+    "aws-sdk": "2.1208.0",
     "fs-extra": "10.1.0",
     "node-fetch": "3.2.10",
     "path": "0.12.7",
@@ -39,11 +39,11 @@
     "url": "https://github.com/aicore/linode-object-storage-lib/issues"
   },
   "devDependencies": {
-    "@commitlint/cli": "17.0.3",
-    "@commitlint/config-conventional": "17.0.3",
+    "@commitlint/cli": "17.1.2",
+    "@commitlint/config-conventional": "17.1.0",
     "c8": "7.12.0",
     "chai": "4.3.6",
-    "eslint": "8.22.0",
+    "eslint": "8.23.0",
     "husky": "8.0.1",
     "mocha": "10.0.0"
   },

@@ -22,7 +22,7 @@
     "release": "npm run bumpPatchVersionWithGitTag"
   },
   "dependencies": {
-    "aws-sdk": "2.1346.0",
+    "aws-sdk": "2.1354.0",
     "fs-extra": "11.1.1",
     "node-fetch": "3.3.1",
     "path": "0.12.7",

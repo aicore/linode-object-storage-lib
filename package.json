@@ -41,7 +41,7 @@
   "devDependencies": {
     "@commitlint/cli": "18.4.3",
     "@commitlint/config-conventional": "18.4.3",
-    "c8": "8.0.1",
+    "c8": "9.1.0",
     "chai": "4.3.7",
     "eslint": "8.46.0",
     "husky": "8.0.3",

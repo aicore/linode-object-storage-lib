@@ -45,7 +45,7 @@
     "chai": "4.3.7",
     "eslint": "8.46.0",
     "husky": "8.0.3",
-    "mocha": "10.2.0"
+    "mocha": "11.8.0"
   },
   "keywords": [
     "linode",
